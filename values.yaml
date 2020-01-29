@@ -52,7 +52,7 @@ guacamole:
       enabled: true
       accessMode: ReadWriteOnce
       size: 8Gi
-      storageClass: nfs-client
+      #storageClass: standard
       # existingClaim: existing-pvc
 
   configurationFiles:
@@ -177,7 +177,7 @@ mysql:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    storageClass: "nfs-client"
+    #storageClass: stantard
     accessMode: ReadWriteOnce
     size: 8Gi
     annotations: {}
