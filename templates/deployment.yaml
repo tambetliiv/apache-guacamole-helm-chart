@@ -53,10 +53,8 @@ spec:
               path: /
               port: http
           volumeMounts:
-            {{- if .Values.guacamole.configurationFiles }}
             - name: configurations
               mountPath: /etc/guacamole
-            {{- end }}
             {{- if .Values.guacamole.persistence.plugins.enabled }}
             - name: plugins
               mountPath: /etc/guacamole/extensions
@@ -76,11 +74,9 @@ spec:
 {{ toYaml . | indent 8 }}
     {{- end }}
       volumes:
-      {{- if .Values.guacamole.configurationFiles }}
         - name: configurations
           configMap:
             name: {{ template "guacamole.fullname" . }}-configuration
-      {{- end }}
       {{- if .Values.guacamole.persistence.plugins.enabled }}
         - name: plugins
           persistentVolumeClaim:

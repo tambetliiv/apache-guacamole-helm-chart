@@ -1,4 +1,3 @@
-{{- if .Values.guacamole.configurationFiles }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,4 +7,16 @@ data:
   {{ $key }}: |-
 {{ $val | indent 4}}
 {{- end }}
-{{- end -}}
+  user-mapping.xml: |-
+    <user-mapping>
+      
+        <!-- Per-user authentication and config information -->
+        <authorize username="admin" password={{ .Values.global.adminPassword | quote }}>
+            <protocol>ssh</protocol>
+            <param name="hostname">{{ .Values.guacamole.ssh.host }}</param>
+            <param name="port">{{ .Values.guacamole.ssh.port }}</param>
+            <param name="username">{{ .Values.guacamole.ssh.user }}</param>
+            <param name="password">{{ .Values.guacamole.ssh.password }}</param>
+        </authorize>
+    
+    </user-mapping>
